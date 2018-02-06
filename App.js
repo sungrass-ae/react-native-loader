@@ -1,30 +1,37 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, ActivityIndicator } from 'react-native';
-import Loader from './src/loader';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  ActivityIndicator
+} from "react-native";
+import { Loader } from "rn-loader";
 
 export default class App extends React.Component {
   state = {
     showLoader: false
-  }
+  };
 
-  componentDidMount() {
+  showLoader = () => {
     this.setState({ showLoader: true });
-  }
+  };
+
+  hideLoader = () => {
+    this.setState({ showLoader: false });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Loader loading={this.state.showLoader} />
-        <Text>Love you babu</Text>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Button
-          onPress={() => {
-            Alert.alert('You tapped the button!');
-          }}
-          title="Press Me"
-        />
+        <View style={styles.buttonWrapper}>
+          <Button onPress={this.showLoader} title="Show Loader" />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button onPress={this.hideLoader} title="Hide Loader" />
+        </View>
       </View>
     );
   }
@@ -33,8 +40,11 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
+  buttonWrapper: {
+    margin: 10
+  }
 });
